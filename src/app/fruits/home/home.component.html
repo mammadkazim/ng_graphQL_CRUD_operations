@@ -1,0 +1,52 @@
+<div class="container">
+  <div class="row mt-2">
+    <div class="col col-md-4 offset-md-4">
+      <a class="btn btn-primary" routerLink="/add">Create a new item</a>
+    </div>
+  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">ID</th>
+        <th scope="col">NAME</th>
+        <th scope="col">QUANTITY</th>
+        <th scope="col">PRICE</th>
+        <th scope="col">ACTIONS</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let fruit of allFruits$ | async; index as i">
+        <th scope="row">{{ i + 1 }}</th>
+        <td>{{ fruit.id }}</td>
+        <td>{{ fruit.name }}</td>
+        <td>{{ fruit.quantity }}</td>
+        <td>{{ fruit.price }}</td>
+        <td>
+          <a class="btn btn-primary" [routerLink]="['edit', fruit.id]">Edit</a
+          ><button class="btn btn-danger" (click)="openModal(fruit.id)">
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div id="deleteModal" class="modal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Delete Fruit</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure to remove the fruit?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button (click)="deleteFruit()" type="button" class="btn btn-danger">Confirm</button>
+      </div>
+    </div>
+  </div>
+</div>
